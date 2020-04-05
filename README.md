@@ -1,2 +1,3 @@
-# splitvent
-Ventilator Splitter Project Source Code
+# ventilator-splitter
+Ventilator splitter project git repository
+tbc
