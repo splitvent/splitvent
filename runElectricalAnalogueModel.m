@@ -31,10 +31,6 @@ switch whichModel
         mdl = fullfile('models','standard_splitter');
     case 'modified'
         mdl = fullfile('models','modified_splitter');
-    case 'twolungs'
-        mdl = fullfile('models','standard_twolungs');
-    case 'tubingcompliance'
-        mdl = fullfile('models','standard_tubingcompliance');
 end
 
 fprintf('[runModel] Running model [%s]\n', mdl);
@@ -53,7 +49,7 @@ if ~isempty(param_struct)
     % a specific parameter configuration was asked for.
     fprintf('[runModel] Changing simulation parameters to: %s\n', ...
         getConfigurationName(param_config));
-    
+
     param_names = fieldnames(param_struct);
     for ix=1:length(param_names)
         assignin(mdlWks, param_names{ix}, param_struct.(param_names{ix}));
@@ -82,7 +78,7 @@ if nargout > 1
         y(2).Volume = simout.ScopeData.signals(7).values;
         y(2).ModifiedVol = modifyVolume(y(2).Volume);
     end
-    
+
     fprintf('[runModel] Optional output saved to variables.\n');
 end
 
