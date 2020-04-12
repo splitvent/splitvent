@@ -39,8 +39,8 @@ for ix=1:length(patient1)
         
         % On-the-fly modifications to the parameters
         param_struct.(whichPair).v_M_inhale = modPIP;
-        param_struct.(whichPair).R_D1 = modR_I;
-        param_struct.(whichPair).R_D2 = modR_I;
+        param_struct.(whichPair).R_I1 = modR_I;
+        param_struct.(whichPair).R_I2 = modR_I;
         param_struct.(whichPair).R_E1 = modR_E;
         param_struct.(whichPair).R_E2 = modR_E;
         param_struct.(whichPair).C_L1 = modC_L*perc(ix);

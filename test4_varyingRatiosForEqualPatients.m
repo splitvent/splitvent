@@ -13,8 +13,8 @@ disp('STEP 3. TWO PATIENTs C');
 
 param_base = PARAMS.Cc;
 
-param_base.R_U1 = 0;
-param_base.R_U2 = 0;
+param_base.R_V1 = 0;
+param_base.R_V2 = 0;
 
 [~, t_base, y_base] = ...
     runElectricalAnalogueModel(whichModel, param_base);
@@ -22,8 +22,8 @@ param_base.R_U2 = 0;
 tVcc = [tidalVolume(t_base, y_base(1).Volume) tidalVolume(t_base, y_base(2).Volume)];
 resultstest4.Cc = [tVcc (tVcc(2)-tVcc(1))];
 table_test4.PIP = param_base.v_M_inhale/98.0665;
-table_test4.RV1 = param_base.R_U1;
-table_test4.RV2 = param_base.R_U2;
+table_test4.RV1 = param_base.R_V1;
+table_test4.RV2 = param_base.R_V2;
 table_test4.tv1 = tVcc(1);
 table_test4.tv2 = tVcc(2);
 
@@ -34,7 +34,7 @@ finished = false;
 iter=1;
 while ~finished
     param_struct = param_base;
-    param_struct.R_U2 = newR_V1*(200+factorV1);
+    param_struct.R_V2 = newR_V1*(200+factorV1);
     
     [~, t, y] = runElectricalAnalogueModel(whichModel, param_struct);
     tv1 = tidalVolume(t, y(1).Volume);
@@ -49,11 +49,11 @@ resultstest4.Cc_decreaseTV2 = [tv1 tv2 (tv1-tv2)];
 t_decrease = t;
 y_decrease = y;
 fprintf('PIP=%3.2f, R_V2=%3.2f, TV1=%3.2f, TV2=%3.2f\n', ...
-    param_struct.v_M_inhale/98.0665, param_struct.R_U2, tv1, tv2);
+    param_struct.v_M_inhale/98.0665, param_struct.R_V2, tv1, tv2);
 
 table_test4.PIP = param_struct.v_M_inhale/98.0665;
-table_test4.RV1 = param_struct.R_U1;
-table_test4.RV2 = param_struct.R_U2;
+table_test4.RV1 = param_struct.R_V1;
+table_test4.RV2 = param_struct.R_V2;
 table_test4.tv1 = tv1;
 table_test4.tv2 = tv2;
 
@@ -81,7 +81,7 @@ factorV1 = 10;
 finished = false;
 iter=1;
 while ~finished
-    param_struct.R_U1 = newR_V1*(200+factorV1);
+    param_struct.R_V1 = newR_V1*(200+factorV1);
     
     [~, t, y] = runElectricalAnalogueModel(whichModel, param_struct);
     tv1 = tidalVolume(t, y(1).Volume);
@@ -96,11 +96,11 @@ t_increase = t;
 y_increase = y;
 resultstest4.Cc_increaseTV2 = [tv1 tv2 (tv1-tv2)];
 fprintf('PIP=%3.2f, R_V1=%3.2f, TV1=%3.2f, TV2=%3.2f\n', ...
-    param_struct.v_M_inhale/98.0665, param_struct.R_U1, tv1, tv2);
+    param_struct.v_M_inhale/98.0665, param_struct.R_V1, tv1, tv2);
 
 table_test4.PIP = param_struct.v_M_inhale/98.0665;
-table_test4.RV1 = param_struct.R_U1;
-table_test4.RV2 = param_struct.R_U2;
+table_test4.RV1 = param_struct.R_V1;
+table_test4.RV2 = param_struct.R_V2;
 table_test4.tv1 = tv1;
 table_test4.tv2 = tv2;
 

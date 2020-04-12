@@ -30,8 +30,8 @@ disp('STEP 1. TWO PATIENTs A');
 
 % On-the-fly modifications to the parameters
 param_stepA.v_M_inhale = modPIP;
-param_stepA.R_D1 = modR_I;
-param_stepA.R_D2 = modR_I;
+param_stepA.R_I1 = modR_I;
+param_stepA.R_I2 = modR_I;
 param_stepA.R_E1 = modR_E;
 param_stepA.R_E2 = modR_E;
 param_stepA.C_L1 = modC_L;
@@ -49,8 +49,8 @@ disp('STEP 2. TWO PATIENTs B');
 [param_stepB] = getParametersWithPatients('B', 'B', param_config);
 % On-the-fly modifications to the parameters
 param_stepB.v_M_inhale = modPIP; % PIP @ 15 cmH2O
-param_stepB.R_D1 = modR_I;
-param_stepB.R_D2 = modR_I;
+param_stepB.R_I1 = modR_I;
+param_stepB.R_I2 = modR_I;
 param_stepB.R_E1 = modR_E;
 param_stepB.R_E2 = modR_E;
 param_stepB.C_L1 = 0.8*modC_L;
@@ -68,8 +68,8 @@ disp('STEP 3. TWO PATIENTs C');
 [param_stepC] = getParametersWithPatients('C', 'C', param_config);
 % On-the-fly modifications to the parameters
 param_stepC.v_M_inhale = modPIP; % PIP @ 15 cmH2O
-param_stepC.R_D1 = modR_I;
-param_stepC.R_D2 = modR_I;
+param_stepC.R_I1 = modR_I;
+param_stepC.R_I2 = modR_I;
 param_stepC.R_E1 = modR_E;
 param_stepC.R_E2 = modR_E;
 param_stepC.C_L1 = 0.7*modC_L;
@@ -87,8 +87,8 @@ disp('STEP 4. TWO PATIENTs D');
 [param_stepD] = getParametersWithPatients('D', 'D', param_config);
 % On-the-fly modifications to the parameters
 param_stepD.v_M_inhale = modPIP; % PIP @ 15 cmH2O
-param_stepD.R_D1 = modR_I;
-param_stepD.R_D2 = modR_I;
+param_stepD.R_I1 = modR_I;
+param_stepD.R_I2 = modR_I;
 param_stepD.R_E1 = modR_E;
 param_stepD.R_E2 = modR_E;
 param_stepD.C_L1 = 0.6*modC_L;

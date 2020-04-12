@@ -10,7 +10,7 @@ end
 switch param_config
     case -1 % do not change parameters at all
         param_struct = [];        
-    case {1, 11} % original configuration
+    case {1, 11} % original configuration (Clinical Units)
         % Set the parameters...
         param_struct.v_M_exhale = 5;% Pa PEEP = 5cmH20
         param_struct.v_M_inhale = 20; % PIP = 20cmH2O
@@ -18,10 +18,10 @@ switch param_config
         % current = m^3/s
         % charge = m^3
         % tube length = 1.5 m?
-        param_struct.R_U1 = 1; % change to R_V1
-        param_struct.R_U2 = 1; % change to R_V2
-        param_struct.R_D1 = 1; % change to R_I1
-        param_struct.R_D2 = 1; % change to R_I2
+        param_struct.R_V1 = 1; % change to R_V1
+        param_struct.R_V2 = 1; % change to R_V2
+        param_struct.R_I1 = 1; % change to R_I1
+        param_struct.R_I2 = 1; % change to R_I2
         
         param_struct.R_L1 = 1e2; % want 2.0cmH2O/L/s
         param_struct.R_L2 = 1e2;
@@ -53,10 +53,10 @@ switch param_config
         % current = m^3/s
         % charge = m^3
         % tube length = 1.5 m?
-        param_struct.R_U1 = 4000;
-        param_struct.R_U2 = 4000;
-        param_struct.R_D1 = 4000;
-        param_struct.R_D2 = 4000;
+        param_struct.R_V1 = 4000;
+        param_struct.R_V2 = 4000;
+        param_struct.R_I1 = 4000;
+        param_struct.R_I2 = 4000;
         
         param_struct.R_L1 = 196133; % want 2.0cmH2O/L/s
         param_struct.R_L2 = 196133;
@@ -87,17 +87,17 @@ switch param_config
         % current = m^3/s
         % charge = m^3
         % tube length = 1.5 m?
-        param_struct.R_U1 = 3150; % Poiseille law for straight laminar pipe
-        param_struct.R_U2 = 3150; % assuming D = 22e-3 m, mu = 18.13e-6 Pa.s, 
-        param_struct.R_D1 = 3150; % L = 1 m, => R = (128*mu*L)/(pi*D^4)
-        param_struct.R_D2 = 3150;
+        param_struct.R_V1 = 3150; % Poiseille law for straight laminar pipe
+        param_struct.R_V2 = 3150; % assuming D = 22e-3 m, mu = 18.13e-6 Pa.s, 
+        param_struct.R_I1 = 3150; % L = 1 m, => R = (128*mu*L)/(pi*D^4)
+        param_struct.R_I2 = 3150;
         
         param_struct.R_L1 = 196133; % want 2.0cmH2O/L/s
         param_struct.R_L2 = 196133;
         param_struct.C_L1 = 6.5261838e-7; % 0.064 L/cmH2O into m^3/Pa
         param_struct.C_L2 = 6.5261838e-7;
-        param_struct.R_ETT1 = 980000*0.8; % DOI: 10.1378/chest.96.6.1374
-        param_struct.R_ETT2 = 980000*0.8; % and 10.31744/einstein_journal/2020AO4805
+        param_struct.R_ETT1 = 784000; % DOI: 10.1378/chest.96.6.1374
+        param_struct.R_ETT2 = 784000; % and 10.31744/einstein_journal/2020AO4805
                                           % the factor of 0.8 was taken
                                           % from Campbell & Brown (1963)
         

@@ -33,15 +33,15 @@ finished = false;
 iter=1;
 while ~finished
     param_struct = getParametersWithPatients('A', 'c', param_config);
-    param_struct.R_D1 = modR_I;
-    param_struct.R_D2 = modR_I;
+    param_struct.R_I1 = modR_I;
+    param_struct.R_I2 = modR_I;
     param_struct.R_E1 = modR_E;
     param_struct.R_E2 = modR_E;
     param_struct.C_L1 = modC_L;
     param_struct.C_L2 = modC_L*0.7;
     
-    param_struct.R_U1 = newR_V1*(200+factorV1);
-    param_struct.R_U2 = newR_V2;
+    param_struct.R_V1 = newR_V1*(200+factorV1);
+    param_struct.R_V2 = newR_V2;
     param_struct.v_M_inhale = modPIP;
     
     [~, t, y] = runElectricalAnalogueModel(whichModel, param_struct);
@@ -71,10 +71,10 @@ while ~finished
 end
 
 fprintf('PIP=%3.2f, R_V1=%3.2f, TV1=%3.2f, TV2=%3.2f\n', ...
-    param_struct.v_M_inhale/98.0665, param_struct.R_U1, tva, tvb);
+    param_struct.v_M_inhale/98.0665, param_struct.R_V1, tva, tvb);
 
 table_test3.PIP_ac = param_struct.v_M_inhale/98.0665;
-table_test3.RV1_ac = param_struct.R_U1;
+table_test3.RV1_ac = param_struct.R_V1;
 table_test3.tvac_A = tva;
 table_test3.tvac_C = tvb;
 

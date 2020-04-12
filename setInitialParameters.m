@@ -4,9 +4,9 @@
 % Simulink and load the MODEL WORKSPACE with the MAT file you just created.
 %
 
-%% Original parameters
+%% Original parameters (Clinical Units)
 % First, clear any parameter from this model that might be in the workspace
-clear v_M_exhale v_M_inhale R_M R_U1 R_U2 R_D1 R_D2 R_L1 R_L2 C_L1 C_L2 ...
+clear v_M_exhale v_M_inhale R_M R_V1 R_V2 R_I1 R_I2 R_L1 R_L2 C_L1 C_L2 ...
     R_aL1 R_aL2 C_aL1 C_aL2 RaR_E1 R_E2 R_O RR I E IE_ratio...
     ETT_factor1 ETT_factor2;
 clc;
@@ -18,10 +18,10 @@ R_M = 1; % Pa*s/m^3
 % current = m^3/s
 % charge = m^3
 % tube length = 1.5 m?
-R_U1 = 1;
-R_U2 = 1;
-R_D1 = 1;
-R_D2 = 1;
+R_V1 = 1;
+R_V2 = 1;
+R_I1 = 1;
+R_I2 = 1;
 
 R_L1 = 1e2; % want 2.0cmH2O/L/s
 R_L2 = 1e2;
@@ -47,11 +47,11 @@ E = 2;
 IE_ratio = I/E;
 
 % ... and save them with a useful name
-save(fullfile('parameterfiles', 'Ventilator_Electrical_Parameters.mat'));
+save(fullfile('parameterfiles', 'Ventilator_Parameters_Clinical_Units.mat'));
 
 %% Conversion to SI units
 % First, clear any parameter from this model that might be in the workspace
-clear v_M_exhale v_M_inhale R_M R_U1 R_U2 R_D1 R_D2 R_L1 R_L2 C_L1 C_L2 ...
+clear v_M_exhale v_M_inhale R_M R_V1 R_V2 R_I1 R_I2 R_L1 R_L2 C_L1 C_L2 ...
     R_aL1 R_aL2 C_aL1 C_aL2 RaR_E1 R_E2 R_O RR I E IE_ratio...
     R_ETT1 R_ETT2;
 clc;
@@ -63,10 +63,10 @@ R_M = 4000; % Pa*s/m^3
 % current = m^3/s
 % charge = m^3
 % tube length = 1.5 m?
-R_U1 = 4000;
-R_U2 = 4000;
-R_D1 = 4000;
-R_D2 = 4000;
+R_V1 = 4000;
+R_V2 = 4000;
+R_I1 = 4000;
+R_I2 = 4000;
 
 R_L1 = 196133; % want 2.0cmH2O/L/s
 R_L2 = 196133;
@@ -92,7 +92,7 @@ E = 2;
 IE_ratio = I/E;
 
 % ... and save them with a useful name
-save(fullfile('parameterfiles', 'Ventilator_Electrical_Parameters_SIUnits.mat'));
+save(fullfile('parameterfiles', 'Ventilator_Parameters_SIUnits.mat'));
 
 %% THESE WE ARE RUNNING!! - 4/4/20
 % Set the parameters...
@@ -102,10 +102,10 @@ R_M = 0; % Pa*s/m^3
 % current = m^3/s
 % charge = m^3
 % tube length = 1.5 m?
-R_U1 = 3150; % Poiseille law for straight laminar pipe
-R_U2 = 3150; % assuming D = 22e-3 m, mu = 18.13e-6 Pa.s,
-R_D1 = 3150; % L = 1 m, => R = (128*mu*L)/(pi*D^4)
-R_D2 = 3150;
+R_V1 = 3150; % Poiseille law for straight laminar pipe
+R_V2 = 3150; % assuming D = 22e-3 m, mu = 18.13e-6 Pa.s,
+R_I1 = 3150; % L = 1 m, => R = (128*mu*L)/(pi*D^4)
+R_I2 = 3150;
 
 R_L1 = 196133; % want 2.0cmH2O/L/s
 R_L2 = 196133;
@@ -132,5 +132,5 @@ I = 1;
 E = 2;
 IE_ratio = I/E;
 % ... and save them with a useful name
-save(fullfile('parameterfiles', 'Ventilator_Electrical_Parameters_CHOSEN.mat'));
+save(fullfile('parameterfiles', 'Ventilator_Parameters_SIUnits_LitBased.mat'));
 
