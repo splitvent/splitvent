@@ -1,26 +1,22 @@
 %% Tidy up
 clc;
 
-% whichModel = 10; % 0 + 10 (US_PHS recommendations)
 whichModel = 'modified';
-param_config = 13; % 3 (literature SI Units) + 10 (RM=RO=0)
-modR_I = 3150*1.8;
-modR_E = 3150*1.8;
-modC_L = 5.50646758e-07; % 54 ml/cmH2O
-modPIP = 15*98.0665; % PIP @ 15 cmH2O
+param_config = 'siunits';
+
 %% TWO PATIENTs C - baseline
-disp('STEP 3. TWO PATIENTs C');
+disp('STARTING POINT: TWO PATIENTs C');
 
 param_base = PARAMS.Cc;
 
 param_base.R_V1 = 0;
 param_base.R_V2 = 0;
 
-[~, t_base, y_base] = ...
-    runElectricalAnalogueModel(whichModel, param_base);
-
+[~, t_base, y_base] = runElectricalAnalogueModel(whichModel, param_base);
 tVcc = [tidalVolume(t_base, y_base(1).Volume) tidalVolume(t_base, y_base(2).Volume)];
+
 resultstest4.Cc = [tVcc (tVcc(2)-tVcc(1))];
+
 table_test4.PIP = param_base.v_M_inhale/98.0665;
 table_test4.RV1 = param_base.R_V1;
 table_test4.RV2 = param_base.R_V2;
@@ -51,7 +47,7 @@ y_decrease = y;
 fprintf('PIP=%3.2f, R_V2=%3.2f, TV1=%3.2f, TV2=%3.2f\n', ...
     param_struct.v_M_inhale/98.0665, param_struct.R_V2, tv1, tv2);
 
-table_test4.PIP = param_struct.v_M_inhale/98.0665;
+table_test4.PIP = param_struct.v_M_inhale/98.0665; % conversion to SI units
 table_test4.RV1 = param_struct.R_V1;
 table_test4.RV2 = param_struct.R_V2;
 table_test4.tv1 = tv1;
@@ -76,7 +72,7 @@ while ~finished
     finished = (tv1/resultstest4.Cc_decreaseTV2(1))>1.3 || iter>50;
 end
 
-newR_V1 = 3150;
+newR_V1 = 3150; % value in SI units
 factorV1 = 10;
 finished = false;
 iter=1;

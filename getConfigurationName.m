@@ -4,28 +4,21 @@ function [strconfig] = getConfigurationName(param_config)
 % getInitialParameters.m
 %
 %
+
 if nargin < 1
-    param_config = -1;
+    param_config = 'clinical';
 elseif isstruct(param_config)
     strconfig = "User defined parameters";
     return;
 end
-switch param_config
-    case -1 % do not change parameters at all
-        strconfig = 'Unchanged from model';
-    case {1, 11} % original configuration
-        % Set the parameters...
-        strconfig = 'Original configuration';
+
+switch param_config       
+    case {'clinical', 'medical', 'clinicalunits', 'medicalunits'}
+        strconfig = 'Clinical Units';
         
-    case {2, 12} % Original SI Units
-        % Set the parameters...
-        strconfig = 'Original configuration (SI Units)';
-    case {3,13}
-        strconfig = "SI Units - based on literature";
-    %case 1000 % load parameters from file?
+    case {'si', 'siunits','SIunits', 'SI'} % Original SI Units
+        strconfig = 'SI Units';
+       
     otherwise
         strconfig = 'New configuration';
-end
-if param_config > 10
-    strconfig = strcat(strconfig, ' [R_M = R_O = 0]');
 end

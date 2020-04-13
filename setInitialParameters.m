@@ -4,133 +4,87 @@
 % Simulink and load the MODEL WORKSPACE with the MAT file you just created.
 %
 
-%% Original parameters (Clinical Units)
-% First, clear any parameter from this model that might be in the workspace
-clear v_M_exhale v_M_inhale R_M R_V1 R_V2 R_I1 R_I2 R_L1 R_L2 C_L1 C_L2 ...
-    R_aL1 R_aL2 C_aL1 C_aL2 RaR_E1 R_E2 R_O RR I E IE_ratio...
-    ETT_factor1 ETT_factor2;
-clc;
-
-% Set the parameters...
-v_M_exhale = 5;% Pa PEEP = 5cmH20
-v_M_inhale = 20; % PIP = 20cmH2O
-R_M = 1; % Pa*s/m^3
-% current = m^3/s
-% charge = m^3
-% tube length = 1.5 m?
-R_V1 = 1;
-R_V2 = 1;
-R_I1 = 1;
-R_I2 = 1;
-
-R_L1 = 1e2; % want 2.0cmH2O/L/s
-R_L2 = 1e2;
-C_L1 = 1e-3; % 0.064 L/cmH2O into m^3/Pa
-C_L2 = 2e-3;
-R_ETT1 = 1e3;
-R_ETT2 = 1e3;
-
-% === artificial patients ====
-R_aL1 = 1e2; % want 2.0cmH2O/L/s
-R_aL2 = 1e2;
-C_aL1 = 1e-3; % 0.064 L/cmH2O into m^3/Pa
-C_aL2 = 2e-3;
-% =======
-
-R_E1 = 1;
-R_E2 = 1;
-R_O = 1;
-
-RR = 15;
-I = 1;
-E = 2;
-IE_ratio = I/E;
-
-% ... and save them with a useful name
-save(fullfile('parameterfiles', 'Ventilator_Parameters_Clinical_Units.mat'));
-
-%% Conversion to SI units
-% First, clear any parameter from this model that might be in the workspace
+%% DEFAULT (CLINICAL UNITS)
 clear v_M_exhale v_M_inhale R_M R_V1 R_V2 R_I1 R_I2 R_L1 R_L2 C_L1 C_L2 ...
     R_aL1 R_aL2 C_aL1 C_aL2 RaR_E1 R_E2 R_O RR I E IE_ratio...
     R_ETT1 R_ETT2;
 clc;
 
 % Set the parameters...
-v_M_exhale = 490;% Pa PEEP = 5cmH20
-v_M_inhale = 1960; % PIP = 20cmH2O
-R_M = 4000; % Pa*s/m^3
-% current = m^3/s
-% charge = m^3
-% tube length = 1.5 m?
-R_V1 = 4000;
-R_V2 = 4000;
-R_I1 = 4000;
-R_I2 = 4000;
+v_M_exhale = 5; % cmH2O (PEEP)
+v_M_inhale = 20; % (PIP)
+R_M = 0; %
 
-R_L1 = 196133; % want 2.0cmH2O/L/s
-R_L2 = 196133;
-C_L1 = 6.5261838e-7; % 0.064 L/cmH2O into m^3/Pa
-C_L2 = 6.5261838e-7;
-R_ETT1 = 1961330;
-R_ETT2 = 1961330;
+R_V1 = 0.06; % cmH2O/L/s
+R_V2 = 0.06; 
+R_I1 = 0.06; % tube length = 1.8 ms
+R_I2 = 0.06;
 
-% === artificial patients ====
-R_aL1 = 196133; % want 2.0cmH2O/L/s
-R_aL2 = 196133;
-C_aL1 = 6.5261838e-7; % 0.064 L/cmH2O into m^3/Pa
-C_aL2 = 6.5261838e-7;
-% =======
-
-R_E1 = 4000;
-R_E2 = 4000;
-R_O = 4000;
-
-RR = 15;
-I = 1;
-E = 2;
-IE_ratio = I/E;
-
-% ... and save them with a useful name
-save(fullfile('parameterfiles', 'Ventilator_Parameters_SIUnits.mat'));
-
-%% THESE WE ARE RUNNING!! - 4/4/20
-% Set the parameters...
-v_M_exhale = 490;% Pa PEEP = 5cmH20
-v_M_inhale = 1960; % PIP = 20cmH2O
-R_M = 0; % Pa*s/m^3
-% current = m^3/s
-% charge = m^3
-% tube length = 1.5 m?
-R_V1 = 3150; % Poiseille law for straight laminar pipe
-R_V2 = 3150; % assuming D = 22e-3 m, mu = 18.13e-6 Pa.s,
-R_I1 = 3150; % L = 1 m, => R = (128*mu*L)/(pi*D^4)
-R_I2 = 3150;
-
-R_L1 = 196133; % want 2.0cmH2O/L/s
-R_L2 = 196133;
-C_L1 = 6.5261838e-7; % 0.064 L/cmH2O into m^3/Pa
-C_L2 = 6.5261838e-7;
-R_ETT1 = 980000*0.8; % DOI: 10.1378/chest.96.6.1374
-R_ETT2 = 980000*0.8; % and 10.31744/einstein_journal/2020AO4805
+R_L1 = 2;
+R_L2 = 2;
+C_L1 = 0.054; % L/cmH2O
+C_L2 = 0.054;
+R_ETT1 = 8; % DOI: 10.1378/chest.96.6.1374
+R_ETT2 = 8; % and 10.31744/einstein_journal/2020AO4805
 % the factor of 0.8 was taken
 % from Campbell & Brown (1963)
 
-% === artificial patients ====
-R_aL1 = 196000; % want 2.0cmH2O/L/s
-R_aL2 = 196000;
-C_aL1 = 6.5261838e-7; % 0.064 L/cmH2O into m^3/Pa
-C_aL2 = 6.5261838e-7;
+
+% === artificial patients (bags)s ====
+R_aL1 = 2;
+R_aL2 = 2;
+C_aL1 = 0.054;
+C_aL2 = 0.054;
 % =======
 
-R_E1 = 3150;
-R_E2 = 3150;
+R_E1 = 0.06;
+R_E2 = 0.06;
 R_O = 0;
 
 RR = 15;
 I = 1;
 E = 2;
-IE_ratio = I/E;
-% ... and save them with a useful name
-save(fullfile('parameterfiles', 'Ventilator_Parameters_SIUnits_LitBased.mat'));
+IE_ratio = param_struct.I/ param_struct.E;
 
+
+save(fullfile('parameterfiles', 'Ventilator_Parameters_ClinicalUnits.mat'));
+
+%% SI UNITS
+clear v_M_exhale v_M_inhale R_M R_V1 R_V2 R_I1 R_I2 R_L1 R_L2 C_L1 C_L2 ...
+    R_aL1 R_aL2 C_aL1 C_aL2 RaR_E1 R_E2 R_O RR I E IE_ratio...
+    R_ETT1 R_ETT2;
+clc;
+
+v_M_exhale = 490; % cmH2O (PEEP)
+v_M_inhale = 1471; % (PIP)
+R_M = 0; %
+
+R_V1 = 5670; % cmH2O/L/s
+R_V2 = 5670;
+R_I1 = 5670; % tube length = 1.8 ms
+R_I2 = 5670;
+
+R_L1 = 196133;
+R_L2 = 196133;
+C_L1 = 5.50647e-7; % L/cmH2O
+C_L2 = 5.50647e-7;
+R_ETT1 = 784000;
+R_ETT2 = 784000;
+
+% === artificial patients (bags)s ====
+R_aL1 = 196133;
+R_aL2 = 196133;
+C_aL1 = 5.50647e-7;
+C_aL2 = 5.50647e-7;
+% =======
+
+R_E1 = 5670;
+R_E2 = 5670;
+R_O = 0;
+
+RR = 15;
+I = 1;
+E = 2;
+IE_ratio = param_struct.I/ param_struct.E;
+
+save(fullfile('parameterfiles', 'Ventilator_Parameters_SIUnits.mat'));

@@ -21,7 +21,7 @@ userDefinedParams = false;
 if nargin == 0
     whichModel='standard';
 elseif nargin < 2
-    param_config = -1;
+    param_config = 'clinical';
 elseif isstruct(param_config)
     userDefinedParams = true;
 end

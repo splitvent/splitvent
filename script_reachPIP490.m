@@ -4,7 +4,7 @@
 % - param_stepA,B,C and D
 % - param_struct.Ab, .Ac, .Ad
 %
-% if things don't wrk, clear the workspace and run test1 and test2
+% if things don't work, clear the workspace and run test1 and test2
 %
 
 RES.Aa = results.Aa;
@@ -28,12 +28,13 @@ testnames = fieldnames(RES);
 for ix=1:length(testnames)
     disp(testnames{ix});
     factorPIP = 98.0665/6;
+    originalPIP = PARAMS.(testnames{ix}).v_M_inhale;
     finished = RES.(testnames{ix})(1)>490;
     tv1 = RES.(testnames{ix})(1);
     tv2 = RES.(testnames{ix})(2);
     iter=1;
     while ~finished
-        PARAMS.(testnames{ix}).v_M_inhale = modPIP+factorPIP;
+        PARAMS.(testnames{ix}).v_M_inhale = originalPIP+factorPIP;
 
         [~, t, y] = runElectricalAnalogueModel(whichModel, PARAMS.(testnames{ix}));
         tv1 = tidalVolume(t, y(1).Volume);

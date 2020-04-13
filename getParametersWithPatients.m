@@ -13,7 +13,7 @@ function [param_struct] = getParametersWithPatients(patient1, patient2, param_co
 %
 
 if nargin < 3
-    param_config = 13;
+    param_config = 'clinical';
 end
 
 [param_struct] = getInitialParameters(param_config);

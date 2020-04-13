@@ -11,19 +11,12 @@
 % PATIENT D: C_L @ 60%
 %
 %% Tidy up
-clc;
 
-% whichModel = 10; % 0 + 10 (US_PHS recommendations)
 whichModel = 'modified';
-param_config = 13; % 3 (literature SI Units) + 10 (RM=RO=0)
-modR_I = 3150*1.8;
-modR_E = 3150*1.8;
-modC_L = 5.50646758e-07; % 54 ml/cmH2O
-modPIP = 15*98.0665; % PIP @ 15 cmH2O
+param_config = 'siunits'; 
 
-% grid search on different configurations of PIP and R_V1
-newPIP = linspace(12, 20, 5);
-newR_V1 = 3150;
+% search on different configurations of PIP and R_V1
+newR_V1 = 3150; % starting point (value in SI units)
 newR_V2 = 0;
 
 %% Grid search
@@ -33,16 +26,8 @@ finished = false;
 iter=1;
 while ~finished
     param_struct = getParametersWithPatients('A', 'd', param_config);
-    param_struct.R_I1 = modR_I;
-    param_struct.R_I2 = modR_I;
-    param_struct.R_E1 = modR_E;
-    param_struct.R_E2 = modR_E;
-    param_struct.C_L1 = modC_L;
-    param_struct.C_L2 = modC_L*0.6;
-    
     param_struct.R_V1 = newR_V1*(200+factorV1);
     param_struct.R_V2 = newR_V2;
-    param_struct.v_M_inhale = modPIP;
     
     [~, t, y] = runElectricalAnalogueModel(whichModel, param_struct);
     tva = tidalVolume(t, y(1).Volume);
@@ -55,10 +40,11 @@ while ~finished
 end
 %
 factorPIP = 98.0665;
+originalPIP = param_struct.v_M_inhale;
 finished = false;
 iter=1;
 while ~finished
-    param_struct.v_M_inhale = modPIP+factorPIP;
+    param_struct.v_M_inhale = originalPIP+factorPIP;
     
     [~, t, y] = runElectricalAnalogueModel(whichModel, param_struct);
     tva = tidalVolume(t, y(1).Volume);
@@ -67,13 +53,13 @@ while ~finished
     fprintf('%d | %3.2f, %3.2f, %3.2f\n', iter, tva, tvb, abs(tva-tvb))
     factorPIP = factorPIP + 98.0665/3;
     iter=iter+1;
-    finished = mean([tva tvb])>490 || iter>50;
+    finished = mean([tva tvb])>490 || iter>50; % values in SI units
 end
 
 fprintf('PIP=%3.2f, R_V1=%3.2f, TV1=%3.2f, TV2=%3.2f\n', ...
     param_struct.v_M_inhale/98.0665, param_struct.R_V1, tva, tvb);
 
-table_test3.PIP_ad = param_struct.v_M_inhale/98.0665;
+table_test3.PIP_ad = param_struct.v_M_inhale/98.0665; % conversion to clinical 
 table_test3.RV1_ad = param_struct.R_V1;
 table_test3.tvad_A = tva;
 table_test3.tvad_D = tvb;
