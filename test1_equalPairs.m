@@ -18,13 +18,15 @@ clc;
 % whichModel = 10; % 0 + 10 (US_PHS recommendations)
 whichModel = 'standard';
 param_config = 'siunits'; % 
+change2clinical = true;
 
 %% TWO PATIENTs A
 disp('STEP 1. TWO PATIENTs A');
 [param_stepA] = getInitialParameters(param_config);
 
 [sim_stepA, t_stepA, y_stepA] = runElectricalAnalogueModel(whichModel, param_stepA);
-tVaa = [tidalVolume(t_stepA, y_stepA(1).Volume) tidalVolume(t_stepA, y_stepA(2).Volume)];
+tVaa = [tidalVolume(t_stepA, y_stepA(1).Volume, change2clinical)...
+    tidalVolume(t_stepA, y_stepA(2).Volume, change2clinical)];
 
 results.Aa = [tVaa (tVaa(2)-tVaa(1))];
 
@@ -33,7 +35,8 @@ disp('STEP 2. TWO PATIENTs B');
 [param_stepB] = getParametersWithPatients('B', 'B', param_config);
 
 [sim_stepB, t_stepB, y_stepB] = runElectricalAnalogueModel(whichModel, param_stepB);
-tVbb = [tidalVolume(t_stepB, y_stepB(1).Volume) tidalVolume(t_stepB, y_stepB(2).Volume)];
+tVbb = [tidalVolume(t_stepB, y_stepB(1).Volume, change2clinical)...
+    tidalVolume(t_stepB, y_stepB(2).Volume, change2clinical)];
 
 results.Bb = [tVbb (tVbb(2)-tVbb(1))];
 
@@ -42,7 +45,8 @@ disp('STEP 3. TWO PATIENTs C');
 [param_stepC] = getParametersWithPatients('C', 'C', param_config);
 
 [sim_stepC, t_stepC, y_stepC] = runElectricalAnalogueModel(whichModel, param_stepC);
-tVcc = [tidalVolume(t_stepC, y_stepC(1).Volume) tidalVolume(t_stepC, y_stepC(2).Volume)];
+tVcc = [tidalVolume(t_stepC, y_stepC(1).Volume, change2clinical) ...
+    tidalVolume(t_stepC, y_stepC(2).Volume, change2clinical)];
 
 results.Cc = [tVcc (tVcc(2)-tVcc(1))];
 
@@ -51,7 +55,8 @@ disp('STEP 4. TWO PATIENTs D');
 [param_stepD] = getParametersWithPatients('D', 'D', param_config);
 
 [sim_stepD, t_stepD, y_stepD] = runElectricalAnalogueModel(whichModel, param_stepD);
-tVdd = [tidalVolume(t_stepD, y_stepD(1).Volume) tidalVolume(t_stepD, y_stepD(2).Volume)];
+tVdd = [tidalVolume(t_stepD, y_stepD(1).Volume, change2clinical) ...
+    tidalVolume(t_stepD, y_stepD(2).Volume, change2clinical)];
 
 results.Dd = [tVdd (tVdd(2)-tVdd(1))];
 

@@ -18,6 +18,7 @@ clc;
 % whichModel = 10; % 0 + 10 (US_PHS recommendations)
 whichModel = 'standard';
 param_config = 'siunits'; % 
+change2clinical = true;
 
 %% Patients discrepancies
 disp('Discrepancies in patients');
@@ -33,7 +34,8 @@ for ix=1:length(patient1)
         param_struct.(whichPair) = getParametersWithPatients(patient1{ix}, patient2{jx}, param_config);      
         
         [~, t.(whichPair), y.(whichPair)] = runElectricalAnalogueModel(whichModel, param_struct.(whichPair));
-        tV = [tidalVolume(t.(whichPair), y.(whichPair)(1).Volume) tidalVolume(t.(whichPair), y.(whichPair)(2).Volume)];
+        tV = [tidalVolume(t.(whichPair), y.(whichPair)(1).Volume, change2clinical) ...
+            tidalVolume(t.(whichPair), y.(whichPair)(2).Volume, change2clinical)];
         
         results.(whichPair) = [tV (tV(2)-tV(1))];
     end

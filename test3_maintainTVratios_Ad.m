@@ -14,6 +14,7 @@
 
 whichModel = 'modified';
 param_config = 'siunits'; 
+change2clinical = true;
 
 % search on different configurations of PIP and R_V1
 newR_V1 = 3150; % starting point (value in SI units)
@@ -30,8 +31,8 @@ while ~finished
     param_struct.R_V2 = newR_V2;
     
     [~, t, y] = runElectricalAnalogueModel(whichModel, param_struct);
-    tva = tidalVolume(t, y(1).Volume);
-    tvb = tidalVolume(t, y(2).Volume);
+    tva = tidalVolume(t, y(1).Volume, change2clinical);
+    tvb = tidalVolume(t, y(2).Volume, change2clinical);
     
     fprintf('%d | %3.2f, %3.2f, %3.2f\n', iter, tva, tvb, abs(tva-tvb))
     factorV1 = factorV1 + 10;
@@ -47,8 +48,8 @@ while ~finished
     param_struct.v_M_inhale = originalPIP+factorPIP;
     
     [~, t, y] = runElectricalAnalogueModel(whichModel, param_struct);
-    tva = tidalVolume(t, y(1).Volume);
-    tvb = tidalVolume(t, y(2).Volume);
+    tva = tidalVolume(t, y(1).Volume, change2clinical);
+    tvb = tidalVolume(t, y(2).Volume, change2clinical);
     
     fprintf('%d | %3.2f, %3.2f, %3.2f\n', iter, tva, tvb, abs(tva-tvb))
     factorPIP = factorPIP + 98.0665/3;
