@@ -45,5 +45,10 @@ param_config = 'siunits'; %
 patientpairs = {'Cc'};
 
 [~, ~, params_4, results_4] = runExperiment(whichModel, param_config, patientpairs);
+[res_mod_4, param_mod_4] = modifyVentilatorSettings('standard', param_config, results_4, params_4);
 
+[res_mod_4.Cc_increase, param_mod_4.Cc_increase] = adjustTV4matchingPatients(...
+    whichModel, param_config, res_mod_4.Cc, param_mod_4.Cc,'increase', 0.3);
 
+[res_mod_4.Cc_decrease, param_mod_4.Cc_decrease] = adjustTV4matchingPatients(...
+    whichModel, param_config, res_mod_4.Cc, param_mod_4.Cc,'decrease', 0.3);

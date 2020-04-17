@@ -18,6 +18,8 @@ switch param_config
         param_struct.R_V2 = 0.06; 
         param_struct.R_I1 = 0.06; % tube length = 1.8 ms
         param_struct.R_I2 = 0.06; 
+        param_struct.R_EV1 = 0;
+        param_struct.R_EV2 = 0;
         
         param_struct.R_L1 = 2; 
         param_struct.R_L2 = 2;
@@ -51,6 +53,8 @@ switch param_config
         param_struct.R_V2 = 5670; 
         param_struct.R_I1 = 5670; % tube length = 1.8 ms
         param_struct.R_I2 = 5670; 
+        param_struct.R_EV1 = 0;
+        param_struct.R_EV2 = 0;
         
         param_struct.R_L1 = 196133; 
         param_struct.R_L2 = 196133;

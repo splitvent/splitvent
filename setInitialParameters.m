@@ -7,7 +7,7 @@
 %% DEFAULT (CLINICAL UNITS)
 clear v_M_exhale v_M_inhale R_M R_V1 R_V2 R_I1 R_I2 R_L1 R_L2 C_L1 C_L2 ...
     R_aL1 R_aL2 C_aL1 C_aL2 RaR_E1 R_E2 R_O RR I E IE_ratio...
-    R_ETT1 R_ETT2;
+    R_ETT1 R_ETT2 R_EV1 R_EV2;
 clc;
 
 % Set the parameters...
@@ -19,6 +19,8 @@ R_V1 = 0.06; % cmH2O/L/s
 R_V2 = 0.06; 
 R_I1 = 0.06; % tube length = 1.8 ms
 R_I2 = 0.06;
+R_EV1 = 0;
+R_EV2 = 0;
 
 R_L1 = 2;
 R_L2 = 2;
@@ -44,7 +46,7 @@ R_O = 0;
 RR = 15;
 I = 1;
 E = 2;
-IE_ratio = param_struct.I/ param_struct.E;
+IE_ratio = I/ E;
 
 
 save(fullfile('parameterfiles', 'Ventilator_Parameters_ClinicalUnits.mat'));
@@ -52,7 +54,7 @@ save(fullfile('parameterfiles', 'Ventilator_Parameters_ClinicalUnits.mat'));
 %% SI UNITS
 clear v_M_exhale v_M_inhale R_M R_V1 R_V2 R_I1 R_I2 R_L1 R_L2 C_L1 C_L2 ...
     R_aL1 R_aL2 C_aL1 C_aL2 RaR_E1 R_E2 R_O RR I E IE_ratio...
-    R_ETT1 R_ETT2;
+    R_ETT1 R_ETT2 R_EV1 R_EV2;
 clc;
 
 v_M_exhale = 490; % cmH2O (PEEP)
@@ -63,6 +65,8 @@ R_V1 = 5670; % cmH2O/L/s
 R_V2 = 5670;
 R_I1 = 5670; % tube length = 1.8 ms
 R_I2 = 5670;
+R_EV1 = 0;
+R_EV2 = 0;
 
 R_L1 = 196133;
 R_L2 = 196133;
@@ -85,6 +89,6 @@ R_O = 0;
 RR = 15;
 I = 1;
 E = 2;
-IE_ratio = param_struct.I/ param_struct.E;
+IE_ratio = I/ E;
 
 save(fullfile('parameterfiles', 'Ventilator_Parameters_SIUnits.mat'));

@@ -33,6 +33,8 @@ switch whichModel
         mdl = fullfile('models','modified_splitter');
     case {'checkvalves', 'diodes'}
         mdl = fullfile('models','modified_splitter_checkvalves');
+    case {'iecontrol', 'ie', 'IEcontrol', 'IE'}
+        mdl = fullfile('models','modified_splitter_IEcontrol');
 end
 
 fprintf('[runModel] Running model [%s]\n', mdl);
