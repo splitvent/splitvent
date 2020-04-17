@@ -1,5 +1,7 @@
 # splitvent: A model for Single Ventilator/Dual Patient Ventilation
 
+[![View splitvent on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://uk.mathworks.com/matlabcentral/fileexchange/75074-splitvent)
+
 This repository is the work corresponding to the paper titled:
 **A Simulated Single Ventilator/Dual Patient Ventilation Strategy for Acute
 Respiratory Distress Syndrome during the COVID-19 Pandemic**. This can be found
