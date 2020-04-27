@@ -1,4 +1,4 @@
-function [simout, t, y, y_adv] = runElectricalAnalogueModel(whichModel, param_config)
+function [simout, t, y, y_adv] = runElectricalAnalogueModel(whichModel, param_config, verbose)
 % RUN ELECTRICAL ANALOGUE MODEL ON SIMULINK. This function programatically
 % can run any from the electrical analogue model
 %
@@ -18,6 +18,10 @@ function [simout, t, y, y_adv] = runElectricalAnalogueModel(whichModel, param_co
 %
 
 userDefinedParams = false;
+if nargin < 3
+    verbose = false;
+end
+
 if nargin == 0
     whichModel='standard';
 elseif nargin < 2
@@ -37,7 +41,7 @@ switch whichModel
         mdl = fullfile('models','modified_splitter_IEcontrol');
 end
 
-fprintf('[runModel] Running model [%s]\n', mdl);
+spltvnt_info(sprintf('[runModel] Running model [%s]', mdl), verbose);
 
 mdl_handle = load_system(mdl);
 mdlWks = get_param(mdl_handle,'ModelWorkspace');
@@ -51,22 +55,22 @@ end
 
 if ~isempty(param_struct)
     % a specific parameter configuration was asked for.
-    fprintf('[runModel] Changing simulation parameters to: %s\n', ...
-        getConfigurationName(param_config));
-    
+    spltvnt_info(sprintf('[runModel] Changing simulation parameters to: %s', ...
+        getConfigurationName(param_config)), verbose);
+
     param_names = fieldnames(param_struct);
     for ix=1:length(param_names)
         assignin(mdlWks, param_names{ix}, param_struct.(param_names{ix}));
     end
 end
 
-fprintf('[runModel] Model loaded [%s] Running... \n', mdl);
+spltvnt_info(sprintf('[runModel] Model loaded [%s] Running...', mdl), verbose);
 
 simout = sim(mdl,'SaveOutput','on','StartTime', '0', 'StopTime', '15', ...
     'FixedStep', '1e-6','OutputSaveName','yOut', 'SaveTime','on',...
     'TimeSaveName','tOut', 'AbsTol','1e-9');
 
-fprintf('[runModel] Finished.\n');
+spltvnt_info(sprintf('[runModel] Finished.'), verbose);
 
 if nargout > 1
     t = simout.ScopeData.time;
@@ -75,25 +79,25 @@ if nargout > 1
     y(1).Flow = simout.ScopeData.signals(3).values;
     y(1).Volume = simout.ScopeData.signals(4).values;
     y(1).ModifiedVol = modifyVolume(y(1).Volume);
-    
+
     y(2).Control = simout.ScopeData.signals(1).values;
     y(2).Pressure = simout.ScopeData.signals(5).values;
     y(2).Flow = simout.ScopeData.signals(6).values;
     y(2).Volume = simout.ScopeData.signals(7).values;
     y(2).ModifiedVol = modifyVolume(y(2).Volume);
-    
-    
-    fprintf('[runModel] Optional output saved to variables.\n');
+
+
+    spltvnt_info(sprintf('[runModel] Optional output saved to variables.'), verbose);
     if nargout > 3
         y_adv(1).Flow_RV = simout.ScopeAdvanced.signals(1).values;
         y_adv(1).Flow_E = simout.ScopeAdvanced.signals(2).values;
         y_adv(1).Flow_O = simout.ScopeAdvanced.signals(5).values; % same on both
         y_adv(1).Flow_M = simout.ScopeAdvanced.signals(6).values; % same on both
-        
+
         y_adv(2).Flow_RV = simout.ScopeAdvanced.signals(3).values;
         y_adv(2).Flow_E = simout.ScopeAdvanced.signals(4).values;
         y_adv(2).Flow_O = simout.ScopeAdvanced.signals(5).values; % same on both
-        y_adv(2).Flow_M = simout.ScopeAdvanced.signals(6).values; % same on both   
+        y_adv(2).Flow_M = simout.ScopeAdvanced.signals(6).values; % same on both
     end
 end
 

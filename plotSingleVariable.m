@@ -11,7 +11,9 @@ wherestart(1) = [];
 fnames = fieldnames(y);
 if sum(contains(fnames, varName, 'IgnoreCase', true)) > 0
     whichField = contains(fnames, varName, 'IgnoreCase', true);
-    plot(t(wherestart:end), y.(fnames{whichField})(wherestart:end), linestylevar, 'LineWidth', 2);
+    plot(t(wherestart:end), y.(fnames{whichField})(wherestart:end), ...
+        linestylevar, 'LineWidth', 2);
+    set(gca, 'fontsize', 16);
     axis tight
 else
     disp('Structure variable name not found.');
