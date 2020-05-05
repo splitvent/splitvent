@@ -23,9 +23,14 @@ The Simulink models are accessed programatically through the code, therefore it
 is not necessary to open them to run tests. The models correspond to the
 **standard-splitter** and our proposed **modified-splitter**. We assume four
 different lung models, called patients A, B, C and D.
-To run this code and the figures presented in the paper, simply run the following
+First, you need to add the MATLAB code to your path, you can do that with the
+`configureSplitvent.m` command by running on Matlab's console:
+```Matlab
+configureSplitvent;
+```
+Then, to run this code and the figures presented in the paper, simply run the following
 command
-```matlab
+```Matlab
 script_run;
 ```
 You will be presented with several figures, corresponding to the graphs of
@@ -34,30 +39,26 @@ There are four figures presented per experiment, therefore the figure numbers
 correspond to `Experiment#` `Measurement#`, e.g. Figure `34` would correspond to the
 Tidal Volume graph of the third experiment.
 
-Looking at the `script_run.m` file, we organised the tests into different
-scripts:
-```matlab
-%% Identical patients - standard splitter
-test1_equalPairs;
-clear t y;
-
-%% Different patients (Ab, Ac, Ad) - standard splitter
-test2_differentPatients;
-script_reachPIP490;
-
-%% Equilibriating different patients' tidal volume - modified splitter.
-test3_maintainTVratios_Ab;
-test3_maintainTVratios_Ac;
-test3_maintainTVratios_Ad;
-test3_plots;
-
-%% Adjusting tidal volume for identical patients - modified splitter.
-test4_varyingRatiosForEqualPatients;
+You can choose to run each of these tests individually, you can do so by running
+```Matlab
+splitvent_demo;
 ```
+and selecting the experiment you wish to run.
+
+Looking at the `splitvent_demo.m` file, we organised the tests into different
+scripts which you can find in the [`code/demos`](code/demos) folder.
+```matlab
+demo_StandardModel1_SamePatients;
+demo_StandardModel2_DifferentPatients;
+demo_ModifiedModel3_Equilibriate;
+demo_ModifiedModel4_AdjustOnSamePatient;
+```
+
 ## Run your own models
 To run any variation of the models we have provided, try to follow the same
 flow as any of the scripts, but more importantly, you will need to add your
-model to the `runElectricalAnalogueModel.m` file, as seen on the next example:
+model to the [`runElectricalAnalogueModel.m`](code/runElectricalAnalogueModel.m)
+file, as seen on the next example:
 ```Matlab
 switch whichModel
     case {'baseline', 'standard'} % our standard splitter
@@ -75,13 +76,12 @@ whichModel = 'your-new-model'; % Same name you put in runElectricalAnalogueModel
 [simout, t, y] = runElectricalAnalogueModel(whichModel, param_config);
 ```
 
-
 # Licensing and Citation
 This project is part of the MIT LICENSE, read all the terms and conditions in
 the [LICENSE](./LICENSE) file. If this code is useful in your research consider
-citing this work following the 
-[link (to be updated)](https://www.medrxiv.org/content/10.1101/2020.04.07.20056309v1), 
-or using the following BibTeX 
+citing this work following the
+[link (to be updated)](https://www.medrxiv.org/content/10.1101/2020.04.07.20056309v1),
+or using the following BibTeX
 entry:
 
 ```BibTeX
