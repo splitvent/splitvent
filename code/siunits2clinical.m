@@ -1,6 +1,16 @@
-function [vecout, cellout] = siunits2clinical(vecin, whichConversion)
+function [vecout, cellout] = siunits2clinical(vecin, whichConversion, change2clinical)
 % CONVERT PASCAL TO cmH2O. Optional cellarray of values for plotting.
 % 
+
+if nargin < 3
+    change2clinical = true;
+end
+
+if change2clinical == false
+    const = 1;
+else
+    
+    
 
 switch lower(whichConversion)
     case 'pressure'
@@ -12,8 +22,13 @@ switch lower(whichConversion)
     case 'flow'
         % m^3/s to L/min ?
         const = 60000;
+    case 'resistance'
+        const = 0.06/5670;
+    case 'compliance'
+        const = 0.054/5.5e-7;
     otherwise 
         const = 1;
+end
 end
         
 vecout = vecin.*const;

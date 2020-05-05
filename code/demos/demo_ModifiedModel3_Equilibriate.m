@@ -28,6 +28,7 @@ patientpairs = {'Ab', 'Ac', 'Ad'};
 %% Plots and results
 if p_ == true 
     [t_3, y_3] = runExperimentsFromParameterStructures(whichModel, param_mod_3);
+    plotModifiedModel3_Equilibriate;
 end
 
 clc;
@@ -35,4 +36,4 @@ clc;
 spltvnt_info('RESULTS. Display all tables generated');
 
 spltvnt_info('\n\tModified model - Equilibriate different patients');
-disp(resultsInTables(res_mod_3, param_mod_3, {'R_V1', 'R_V2'}));
+disp(resultsInTables(res_mod_3, param_mod_3, {'R_V1', 'R_V2'}, paramUnits));

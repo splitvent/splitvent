@@ -1,4 +1,4 @@
-function T = resultsInTables(results, parameters, extraColumns)
+function T = resultsInTables(results, parameters, extraColumns, paramUnits)
 % SAVE RESULTS IN TABLE STRUCTURE. Readability
 %
 
@@ -7,10 +7,21 @@ if nargin < 3
     xtravars = 0;
     extraColumns = {};
     extraVarTypes = {};
+    paramUnits = 'clinical';
+elseif nargin < 4
+    paramUnits = 'clinical';
+    if isempty(extraColumns)
+        xtravars = 0;
+        extraColumns = {};
+        extraVarTypes = {};
+    end
+    
 else
     xtravars = length(extraColumns);
     extraVarTypes = repmat({'double'}, 1, xtravars);
 end
+
+change2clinical = strcmpi(paramUnits,'siunits');
 
 expnames = fieldnames(results);
 exps = length(expnames); % rows
@@ -32,7 +43,20 @@ for ix=1:vars
         if ix<=5
             T.(varNames{ix})(jx) = results.(expnames{jx})(ix);
         else
-            T.(varNames{ix})(jx) = parameters.(expnames{jx}).(extraColumns{ix-5});
+            switch extraColumns{ix-5}(1)
+                case 'R'
+                    valueintable = siunits2clinical(...
+                        parameters.(expnames{jx}).(extraColumns{ix-5}), 'resistance', ...
+                        change2clinical);
+                case 'C'
+                    valueintable = siunits2clinical(parameters.(...
+                        expnames{jx}).(extraColumns{ix-5}), 'compliance', ...
+                        change2clinical);
+                otherwise
+                    valueintable = parameters.(expnames{jx}).(extraColumns{ix-5});
+            end
+            
+            T.(varNames{ix})(jx) = valueintable;
         end
     end
     

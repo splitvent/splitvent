@@ -1,4 +1,4 @@
-function [parameters, results] = runExperiment(whichModel, param_config, patientPairs, verbose)
+function [parameters, results] = runExperiment(whichModel, paramUnits, patientPairs, verbose)
 % RUN EXPERIMENT. Utilises function RUNELECTRICALANALOGUEMODEL function on
 % pairs of patients specified in cell array 'patientPairs's. Function does
 % not return times or signals.
@@ -9,7 +9,7 @@ if nargin < 4
 end
 
 numExp = length(patientPairs);
-change2clinical = strcmpi(param_config,'siunits');
+change2clinical = strcmpi(paramUnits,'siunits');
 for ix=1:numExp
     pair = patientPairs{ix}; 
     
@@ -17,7 +17,7 @@ for ix=1:numExp
     patient2 = pair(2);
     
     spltvnt_info(sprintf('Patient 1 [%s], Patient2 [%s]', patient1, patient2));
-    parameters.(pair) = getParametersWithPatients(patient1, patient2, param_config);
+    parameters.(pair) = getParametersWithPatients(patient1, patient2, paramUnits);
     [~, t.(pair), y.(pair)] = runElectricalAnalogueModel(whichModel, parameters.(pair), verbose);
     
     [tV, peep] = getTVandPEEP(t.(pair), y.(pair), change2clinical);

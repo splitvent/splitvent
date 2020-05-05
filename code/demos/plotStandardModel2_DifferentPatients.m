@@ -1,4 +1,4 @@
-varNames = fieldnames(y_2.Aa);
+varNames = fieldnames(y_2.Ab);
 varNames(1) = [];
 expNames = fieldnames(y_2);
 

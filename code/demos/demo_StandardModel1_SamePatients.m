@@ -35,4 +35,4 @@ end
 
 spltvnt_info('RESULTS. Display all tables generated');
 spltvnt_info('\tStandard model - control PIP where TV(1) < 490');
-disp(resultsInTables(res_mod_1, param_mod_1));
+disp(resultsInTables(res_mod_1, param_mod_1, [], paramUnits));

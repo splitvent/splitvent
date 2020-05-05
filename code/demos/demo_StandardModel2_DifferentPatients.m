@@ -30,7 +30,8 @@ if p_ == true % plots will be created
    [t_2, y_2] = runExperimentsFromParameterStructures(whichModel, param_mod_2);
    plotStandardModel2_DifferentPatients;
 end
+%%
 
 spltvnt_info('RESULTS. Display all tables generated');
 spltvnt_info('\tStandard model - control PIP where TV(1) < 490');
-disp(resultsInTables(res_mod_2, param_mod_2));
+disp(resultsInTables(res_mod_2, param_mod_2, [], paramUnits));

@@ -24,11 +24,12 @@ options.percentage = 0.30;
 
 if p_==true
     [t_4, y_4] = runExperimentsFromParameterStructures(whichModel, param_mod_4);
+    plotModifiedModel4_AdjustOnSamePatients;
 end
 
 clc;
 
 spltvnt_info('RESULTS. Display all tables generated');
 spltvnt_info('\n\tModified model - control TV in equal patients');
-disp(resultsInTables(res_mod_4, param_mod_4, {'R_V1', 'R_V2'}));
+disp(resultsInTables(res_mod_4, param_mod_4, {'R_V1', 'R_V2'}, paramUnits));
 
