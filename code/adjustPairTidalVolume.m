@@ -1,5 +1,5 @@
 function [res_mod, param_mod] = adjustPairTidalVolume(whichModel, paramUnits, results, parameters, options)
-% ADJUST TIDAL VOLUME for a pair of patients.
+% ADJUST TIDAL VOLUME for a pair of patients. 
 %
 
 verbose = false;
@@ -72,7 +72,11 @@ switch lower(options)
                 iter, originalPIP+increasePIP, tv1, tv2));
             increasePIP = increasePIP + deltaPIP;
             iter=iter+1;
-            finished = mean([tv1 tv2])>490 || iter>50; % condition in SI units
+            if ~strcmpi(whichModel, 'standard')
+                finished = mean([tv1 tv2])>490 || iter>50; % condition in SI units
+            else
+                finished = res_mod(2)>490;
+            end    
         end
     case 'increase'
         if percentage > 1

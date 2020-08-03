@@ -1,5 +1,15 @@
 function T = resultsInTables(results, parameters, extraColumns, paramUnits)
-% SAVE RESULTS IN TABLE STRUCTURE. Readability
+% SAVE RESULTS IN TABLE STRUCTURE. This function allows for user readability
+% of results. 
+% Rows - Variables: PIP, TV1, TV2, PEEP1, PEEP2 (by default)
+% Columns - Experiments (pair of patients, e.g Ab, Ad, ...)
+%
+% USAGE: T = resultsInTables(results, parameters, extraColumns, paramUnits)
+%       results := Structure with results. 
+%    parameters := Structure with parameters.
+%  extraColumns := Cell array of strings with fieldnames in <parameters>
+%                  structure to include in table. 
+%    paramUnits := Units to display the results in 'clinical' or 'siunits'
 %
 
 if nargin < 3

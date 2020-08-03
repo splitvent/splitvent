@@ -6,15 +6,9 @@ function [simout, t, y, y_adv] = runElectricalAnalogueModel(whichModel, param_co
 %
 % INPUTS:   whichModel = 'baseline' - standard-splitter
 %           whichModel = 'modified' - modified-splitter
-%           whichModel = -1 => ssc_vent_splitter_electrical_single (model_single)
-%           whichModel = 0  => ssc_vent_splitter_electrical (model_0)[default]
-%           whichModel = 1  => ssc_vent_splitter_electrical_parallelbag (model_1)
-%           whichModel = 2  => ssc_vent_splitter_electrical_seriesbag (model_2)
-%           whichModel = 3  => ssc_vent_splitter_electrical_seriesbagpipe (model_3)
 %
-%           param_config = -1 (default) does not change anything
-%           param_config = 1 Original parameter configuration.
-%           param_config = 2 Original parameter configuration (SI units)
+%           param_config = 'clinical' (default) 
+%           param_config = 'siunits'
 %
 
 userDefinedParams = false;
