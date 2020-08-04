@@ -41,6 +41,7 @@ patientpairs = {'Ab', 'Ac', 'Ad'};
 
 if p_ == true 
     [t_3, y_3] = runExperimentsFromParameterStructures(whichModel, param_mod_3);
+    plotModifiedModel3_Equilibriate;
 end
 
 %% Test 4: Modified model - Adjust TV on the same patient
@@ -68,6 +69,7 @@ options.percentage = 0.30;
 
 if p_==true
     [t_4, y_4] = runExperimentsFromParameterStructures(whichModel, param_mod_4);
+    plotModifiedModel4_AdjustOnSamePatients;
 end
     
 %% Display all tables
@@ -78,8 +80,8 @@ spltvnt_info('\tStandard model - control PIP where TV(1) < 490');
 disp(resultsInTables(res_mod_1n2, param_mod_1n2));
 
 spltvnt_info('\n\tModified model - Equilibriate different patients');
-disp(resultsInTables(res_mod_3, param_mod_3, {'R_V1', 'R_V2'}));
+disp(resultsInTables(res_mod_3, param_mod_3, {'R_V1', 'R_V2'}, paramUnits));
 
 spltvnt_info('\n\tModified model - control TV in equal patients');
-disp(resultsInTables(res_mod_4, param_mod_4, {'R_V1', 'R_V2'}));
+disp(resultsInTables(res_mod_4, param_mod_4, {'R_V1', 'R_V2'}, paramUnits));
 

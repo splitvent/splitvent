@@ -24,6 +24,9 @@ elseif nargin < 4
         xtravars = 0;
         extraColumns = {};
         extraVarTypes = {};
+    else
+        xtravars = length(extraColumns);
+        extraVarTypes = repmat({'double'}, 1, xtravars);
     end
     
 else

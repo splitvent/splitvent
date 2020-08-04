@@ -71,7 +71,7 @@ end
 ```
 and then run it as in the following example:
 ```Matlab
-param_config = 13; % default parameters
+param_config = 'siunits'; % default parameters
 whichModel = 'your-new-model'; % Same name you put in runElectricalAnalogueModel.m
 [simout, t, y] = runElectricalAnalogueModel(whichModel, param_config);
 ```
