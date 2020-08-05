@@ -14,7 +14,7 @@
 %
 %% Setup 
 v_ = false; % verbose runElectricalAnalogueModel (default = false)
-p_ = true;  % plot results (default = true)
+p_ = false;  % plot results (default = true)
 
 
 %% Tests 1 and 2: Standard model
@@ -26,10 +26,8 @@ patientpairs = {'Aa', 'Bb', 'Cc', 'Dd', 'Ab', 'Ac', 'Ad'};
 [params_1n2, results_1n2] = runExperiment(whichModel, paramUnits, patientpairs);
 [res_mod_1n2, param_mod_1n2] = adjustTidalVolume(whichModel, paramUnits, results_1n2, params_1n2);
 
-if p_ == true % plots will be created
-   [t_1n2, y_1n2] = runExperimentsFromParameterStructures(whichModel, param_mod_1n2);
-   script_plotStandardModelTests_1n2;
-end
+[t1_plots, y1_plots] = runExperimentsFromParameterStructures(whichModel, params_1n2);
+[t_1n2, y_1n2] = runExperimentsFromParameterStructures(whichModel, param_mod_1n2);
 %% Test 3: Modified model - Equilibriate TV on different patients
 
 whichModel = 'modified'; 
@@ -39,10 +37,7 @@ patientpairs = {'Ab', 'Ac', 'Ad'};
 [params_3, results_3] = runExperiment(whichModel, paramUnits, patientpairs);
 [res_mod_3, param_mod_3] = adjustTidalVolume(whichModel, paramUnits, results_3, params_3);
 
-if p_ == true 
-    [t_3, y_3] = runExperimentsFromParameterStructures(whichModel, param_mod_3);
-    plotModifiedModel3_Equilibriate;
-end
+[t_3, y_3] = runExperimentsFromParameterStructures(whichModel, param_mod_3);
 
 %% Test 4: Modified model - Adjust TV on the same patient
 
@@ -67,11 +62,8 @@ options.percentage = 0.30;
  param_mod_4.(['Cc_' options.option])] = adjustPairTidalVolume(...
     whichModel, paramUnits, res_mod_4.Cc, param_mod_4.Cc, options);
 
-if p_==true
-    [t_4, y_4] = runExperimentsFromParameterStructures(whichModel, param_mod_4);
-    plotModifiedModel4_AdjustOnSamePatients;
-end
-    
+[t_4, y_4] = runExperimentsFromParameterStructures(whichModel, param_mod_4);
+
 %% Display all tables
 clc;
 
@@ -84,4 +76,10 @@ disp(resultsInTables(res_mod_3, param_mod_3, {'R_V1', 'R_V2'}, paramUnits));
 
 spltvnt_info('\n\tModified model - control TV in equal patients');
 disp(resultsInTables(res_mod_4, param_mod_4, {'R_V1', 'R_V2'}, paramUnits));
+
+%% Plot results
+if p_==true 
+    script_createCSVtablesPerFigure;
+    plotSplitventFigures_RSOS;
+end
 

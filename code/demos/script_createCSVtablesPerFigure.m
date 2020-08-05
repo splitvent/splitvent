@@ -12,20 +12,22 @@ fig4bprefix = 'Fig4B_standardSplitter_comparison_PressureVolumeFlow_dissimilarPa
 fig5bprefix = 'Fig5B_modifiedSplitter_normaliseTidalVolume_dissimilarPatientModels_';
 fig6bprefix = 'Fig6B_modifiedSplitter_adjustTidalVolume_Patients_C_C_';
 
-csv_1n2 = createCSVtablesFromOutputs(t_1n2, y_1n2);
-csv_3 = createCSVtablesFromOutputs(t_3, y_3);
-csv_4 = createCSVtablesFromOutputs(t_4, y_4);
+csv_1 = createCSVtablesFromOutputs(t1_plots, y1_plots, {'Volume'});
+csv_2 = createCSVtablesFromOutputs(t_1n2, y_1n2, {'Volume'});
+csv_3 = createCSVtablesFromOutputs(t_3, y_3, {'Control', 'Volume'});
+csv_4 = createCSVtablesFromOutputs(t_4, y_4, {'Control', 'Volume'});
 
+%% Save figure data
 % Figure 3B
-writetable(csv_1n2.Aa(:,1:6), fullfile(path2csv, [fig3bprefix 'LungModelA.csv']));
-writetable(csv_1n2.Bb(:,1:6), fullfile(path2csv, [fig3bprefix 'LungModelB.csv']));
-writetable(csv_1n2.Cc(:,1:6), fullfile(path2csv, [fig3bprefix 'LungModelC.csv']));
-writetable(csv_1n2.Dd(:,1:6), fullfile(path2csv, [fig3bprefix 'LungModelD.csv']));
+writetable(csv_1.Aa(:,1:5), fullfile(path2csv, [fig3bprefix 'LungModelA.csv']));
+writetable(csv_1.Bb(:,1:5), fullfile(path2csv, [fig3bprefix 'LungModelB.csv']));
+writetable(csv_1.Cc(:,1:5), fullfile(path2csv, [fig3bprefix 'LungModelC.csv']));
+writetable(csv_1.Dd(:,1:5), fullfile(path2csv, [fig3bprefix 'LungModelD.csv']));
 
 % Figure 4B
-writetable(csv_1n2.Ab, fullfile(path2csv, [fig4bprefix 'Patients_A_B.csv']));
-writetable(csv_1n2.Ac, fullfile(path2csv, [fig4bprefix 'Patients_A_C.csv']));
-writetable(csv_1n2.Ad, fullfile(path2csv, [fig4bprefix 'Patients_A_D.csv']));
+writetable(csv_2.Ab, fullfile(path2csv, [fig4bprefix 'Patients_A_B.csv']));
+writetable(csv_2.Ac, fullfile(path2csv, [fig4bprefix 'Patients_A_C.csv']));
+writetable(csv_2.Ad, fullfile(path2csv, [fig4bprefix 'Patients_A_D.csv']));
 
 % Figure 5B
 writetable(csv_3.Ab, fullfile(path2csv, [fig5bprefix 'Patients_A_B.csv']));
