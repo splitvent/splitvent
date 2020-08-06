@@ -187,7 +187,7 @@ dummy = pressure(1);
 subplot(321)
 plot(dummyt, dummy, 'w', t, pressure1(:,1), mb, t, pressure1(:,2), mc, t, pressure1(:,3), md, 'LineWidth', 1.5);
 grid on
-yticks(linspace(5, 15, 11));
+yticks(linspace(5, 20, 11));
 yticklabels({'' '6' '' '' '' '10' '' '' '' '14' ''})
 xticklabels([]);
 xticks(linspace(3.5, 12, 9))
@@ -246,7 +246,7 @@ yticklabels({'' '-48' '' '' '' '0' '' '' '' '48' ''})
 yticks(linspace(-60, 60, 11));
 xticklabels([]);
 xticks(linspace(3.5, 12, 9))
-ylabel(sprintf('Tidal Volume \n(mL)'), 'FontSize', 18, 'FontWeight', 'bold');
+ylabel(sprintf('Flow \n(L/min)'), 'FontSize', 18, 'FontWeight', 'bold');
 xlabel(sprintf('Time (s)'), 'FontSize', 18, 'FontWeight', 'bold');
 xlim(xaxis);
 
@@ -279,8 +279,8 @@ dummy = pressure1(1);
 subplot(321)
 plot(t, pressure1(:,1), ma, t, pressure1(:,2), mb, t, pressure1(:,3), mc, 'LineWidth', 1.5);
 grid on
-yticks(linspace(5, 15, 11));
-yticklabels({'' '6' '' '' '' '10' '' '' '' '14' ''})
+yticks(linspace(5, 23, 11))
+yticklabels({'' '6.5' '' '' '' '11' '' '' '' '18.5' ''})
 xticklabels([]);
 xticks(linspace(3.5, 12, 9))
 xlim(xaxis);
@@ -290,13 +290,13 @@ title('Patient 1', 'FontSize', 18, 'FontWeight', 'bold');
 subplot(322)
 plot(t, pressure2(:,1), ma, t, pressure2(:,2), mb, t, pressure2(:,3), mc, 'LineWidth', 1.5);
 grid on
-yticks(linspace(5, 15, 11));
+yticks(linspace(5, 23, 11))
 yticklabels([]);
 xticklabels([]);
 xticks(linspace(3.5, 12, 9));
 xlim(xaxis);
 legend({'C-C','C-C(-)', 'C-C(+)'},'Location', 'northeast');
-title('Patient 1', 'FontSize', 18, 'FontWeight', 'bold');
+title('Patient 2', 'FontSize', 18, 'FontWeight', 'bold');
 
 
 tidalvolume1 = [csv_4.Cc.ModifiedVol_CC_1C ...
@@ -309,8 +309,8 @@ tidalvolume2 = [csv_4.Cc.ModifiedVol_CC_2C ...
 subplot(323)
 plot(t, tidalvolume1(:,1), ma, t, tidalvolume1(:,2), mb, t, tidalvolume1(:,3), mc, 'LineWidth', 1.5);
 grid on
-yticklabels({'' '49' '' '' '' '245' '' '' '' '441' ''})
-yticks(linspace(0, 490, 11));
+yticklabels({'' '50' '' '' '' '250' '' '' '' '450' ''})
+yticks(linspace(0, 500, 11));
 xticklabels([]);
 xticks(linspace(3.5, 12, 9))
 xlim(xaxis);
@@ -319,7 +319,7 @@ ylabel(sprintf('Tidal Volume \n(mL)'), 'FontSize', 18, 'FontWeight', 'bold');
 subplot(324)
 plot(t, tidalvolume2(:,1), ma, t, tidalvolume2(:,2), mb, t, tidalvolume2(:,3), mc, 'LineWidth', 1.5);
 grid on
-yticks(linspace(0, 490, 11));
+yticks(linspace(0, 500, 11));
 yticklabels([]);
 xticklabels([]);
 xticks(linspace(3.5, 12, 9));
@@ -335,18 +335,18 @@ flow2 = [csv_4.Cc.Flow_CC_2C ...
 subplot(325)
 plot(t, flow1(:,1), ma, t, flow1(:,2), mb, t, flow1(:,3), mc, 'LineWidth', 1.5);
 grid on
-yticklabels({'' '-48' '' '' '' '0' '' '' '' '48' ''})
-yticks(linspace(-60, 60, 11));
+yticklabels({'' '-74' '' '' '' '0' '' '' '' '74' ''})
+yticks(linspace(-105, 105, 11));
 xticklabels([]);
 xticks(linspace(3.5, 12, 9))
-ylabel(sprintf('Tidal Volume \n(mL)'), 'FontSize', 18, 'FontWeight', 'bold');
+ylabel(sprintf('Flow \n(L/min)'), 'FontSize', 18, 'FontWeight', 'bold');
 xlabel(sprintf('Time (s)'), 'FontSize', 18, 'FontWeight', 'bold');
 xlim(xaxis);
 
 subplot(326)
 plot( t, flow2(:,1), ma, t, flow2(:,2), mb, t, flow2(:,3), mc, 'LineWidth', 1.5);
 grid on
-yticks(linspace(-60, 60, 11));
+yticks(linspace(-105, 105, 11));
 yticklabels([]);
 xticklabels([]);
 xticks(linspace(3.5, 12, 9));
