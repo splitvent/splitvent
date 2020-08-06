@@ -1,6 +1,6 @@
 # splitvent: A model for Single Ventilator/Dual Patient Ventilation
 
-[![View splitvent on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://uk.mathworks.com/matlabcentral/fileexchange/75074-splitvent)
+[![View splitvent on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://uk.mathworks.com/matlabcentral/fileexchange/75074-splitvent) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3974748.svg)](https://doi.org/10.5281/zenodo.3974748)
 
 This repository is the work corresponding to the paper titled:
 **A Simulated Single Ventilator/Dual Patient Ventilation Strategy for Acute
